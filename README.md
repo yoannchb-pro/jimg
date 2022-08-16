@@ -2,7 +2,7 @@
 
 > **Note:** The README is inspired from merge-images by Luke Childs but it's not the same package and fonctionnalities
 
-Merge, truncat, compress, resize, covert, edit multiple images into one single image
+Merge, truncat, compress, resize, convert, edit multiple images into one single image on nodejs and in the browser.
 
 ## Install
 
@@ -32,7 +32,7 @@ jimg({ images: ["/body.png", "/eyes.png", "/mouth.png"] }).then(
 Or in the browser
 
 ```html
-<script src="https://unpkg.com/jimg@1.0.0/dist/index.js"></script>
+<script src="https://unpkg.com/jimg@1.0.1/dist/index.js"></script>
 ```
 
 And that would update the `img` element to show this image:
@@ -51,15 +51,15 @@ jimg({
 // data:image/png;base64,iVBORw0KGgoAA...
 ```
 
-## Positioning
+## Positioning and resizing
 
-Those source png images were already the right dimensions to be overlaid on top of each other. You can also supply an array of objects with x/y co-ords to manually position each image:
+Those source png images were already the right dimensions to be overlaid on top of each other. You can also supply an array of objects with x/y co-ords to manually position each image or resize an image with width/height:
 
 ```js
 jimg({
     images: [
         { path: 'body.png', x: 0, y: 0 },
-        { path: 'eyes.png', x: 32, y: 0 },
+        { path: 'eyes.png', x: 32, y: 0, width: 256, height: 256 },
         { path: 'mouth.png', x: 16, y: 0 }
     ]
 })

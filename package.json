@@ -1,7 +1,7 @@
 {
   "name": "jimg",
-  "version": "1.0.0",
-  "description": "Merge, truncat, compress, resize, covert, edit multiple images into one single image",
+  "version": "1.0.1",
+  "description": "Merge, truncat, compress, resize, convert, edit multiple images into one single image",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
