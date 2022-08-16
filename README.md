@@ -41,7 +41,7 @@ And that would update the `img` element to show this image:
 
 ## Saving image
 
-This is how to save an image to a specific location on nodejs or ine the browser
+This is how to save an image to a specific location on nodejs or in the browser
 
 ```js
 jimg({
