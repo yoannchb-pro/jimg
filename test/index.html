@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Test browser</title>
+    <script src="../dist/index.js"></script>
   </head>
   <body>
     <canvas id="test"></canvas>
@@ -12,8 +13,7 @@
     <canvas id="test-position-and-size"></canvas>
     <canvas id="test-truncat"></canvas>
   </body>
-  <script type="module">
-    import { jimg } from "../browser/index.js";
+  <script>
     (async function () {
       //opacity
       await jimg({

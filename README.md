@@ -21,7 +21,7 @@ With the following images:
 You can do:
 
 ```js
-const { jimg } = require("jimg");
+const jimg = require("jimg");
 
 jimg({ images: ["/body.png", "/eyes.png", "/mouth.png"] }).then(
   (b64) => (document.querySelector("img").src = b64)
@@ -32,10 +32,7 @@ jimg({ images: ["/body.png", "/eyes.png", "/mouth.png"] }).then(
 Or in the browser
 
 ```html
-<script
-  type="module"
-  src="https://unpkg.com/jimg@1.0.0/browser/index.js"
-></script>
+<script src="https://unpkg.com/jimg@1.0.0/dist/index.js"></script>
 ```
 
 And that would update the `img` element to show this image:

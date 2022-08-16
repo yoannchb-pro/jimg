@@ -1,4 +1,4 @@
-declare type ImageSpecification = {
+type ImageSpecification = {
     path: string;
     x?: number;
     y?: number;
@@ -19,4 +19,4 @@ declare function jimg(options: {
     format?: string;
     canvas?: any;
 }): Promise<string>;
-export default jimg;
+export { jimg as default };
