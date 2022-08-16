@@ -137,7 +137,7 @@ jimg({
 
 ## Canvas
 
-Cunstom the canvas. Can be an instance of document canvas or nodejs canvas package.
+Custom the canvas. Can be an instance of document canvas or nodejs canvas package.
 
 ```js
 jimg({
