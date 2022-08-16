@@ -6,7 +6,7 @@ declare type ImageSpecification = {
     height?: number;
     opacity?: number;
 };
-export declare function jimg(options: {
+declare function jimg(options: {
     path?: string;
     images: (ImageSpecification | string)[];
     truncat?: {
@@ -17,5 +17,6 @@ export declare function jimg(options: {
     };
     quality?: number;
     format?: string;
+    canvas?: any;
 }): Promise<string>;
-export {};
+export default jimg;

@@ -89,4 +89,3 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     }
     exports.default = jimg;
 });
-//# sourceMappingURL=index.js.map

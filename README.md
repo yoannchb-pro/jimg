@@ -1,6 +1,8 @@
 # jimg
 
-Merge multiple images into one single image
+> **Note:** The README is inspired from merge-images by Luke Childs but it's not the same package and fonctionnalities
+
+Merge, truncat, compress, resize, covert, edit multiple images into one single image
 
 ## Install
 
@@ -19,7 +21,7 @@ With the following images:
 You can do:
 
 ```js
-const jimg = require("jimg");
+const { jimg } = require("jimg");
 
 jimg({ images: ["/body.png", "/eyes.png", "/mouth.png"] }).then(
   (b64) => (document.querySelector("img").src = b64)
@@ -27,9 +29,30 @@ jimg({ images: ["/body.png", "/eyes.png", "/mouth.png"] }).then(
 // data:image/png;base64,iVBORw0KGgoAA...
 ```
 
+Or in the browser
+
+```html
+<script
+  type="module"
+  src="https://unpkg.com/jimg@1.0.0/browser/index.js"
+></script>
+```
+
 And that would update the `img` element to show this image:
 
 <img src="./assets/face.png" width="128">
+
+## Saving image
+
+This is how to save an image to a specific location on nodejs only
+
+```js
+jimg({
+  path: "./merged.png",
+  images: ["/body.png", "/eyes.png", "/mouth.png"],
+}).then((b64) => (document.querySelector("img").src = b64));
+// data:image/png;base64,iVBORw0KGgoAA...
+```
 
 ## Positioning
 
@@ -71,10 +94,13 @@ jimg({
 
 ### Truncat
 
-By default the new image dimensions will be set to the width of the widest source image and the height of the tallest source image. You can manually specify your own dimensions in the options object:
+You can simply truncat an image by using truncat property (x, y, width and height are optionals)
 
 ```js
-jimg({ images: ["/body.png", "/eyes.png", "/mouth.png"], truncat: { x: 0, y: 0, width: 128, height: 128 } }).then(
+jimg({
+    images: ["/body.png", "/eyes.png", "/mouth.png"],
+    truncat: { x: 0, y: 0, width: 128, height: 128 }
+  }).then(
   b64 => ...
 );
 // data:image/png;base64,iVBORw0KGgoAA...
@@ -83,6 +109,48 @@ jimg({ images: ["/body.png", "/eyes.png", "/mouth.png"], truncat: { x: 0, y: 0, 
 Which will look like this:
 
 <img src="./assets/face-custom-dimension.png" width="64">
+
+## Quality
+
+You can custom the quality of the image to compress it. Default is 0.92.
+
+```js
+jimg({
+    images: ["/body.png", "/eyes.png", "/mouth.png"],
+    quality: 0.7
+  }).then(
+  b64 => ...
+);
+// data:image/png;base64,iVBORw0KGgoAA...
+```
+
+## Format
+
+Custom the format in jpg for example
+
+```js
+jimg({
+    images: ["/body.png", "/eyes.png", "/mouth.png"],
+    format: 'image/jpeg'
+  }).then(
+  b64 => ...
+);
+// data:image/png;base64,iVBORw0KGgoAA...
+```
+
+## Canvas
+
+Cunstom the canvas. Can be an instance of document canvas or nodejs canvas package.
+
+```js
+jimg({
+    images: ["/body.png", "/eyes.png", "/mouth.png"],
+    canvas: document.querySelector("canvas") //of createCanvas()
+  }).then(
+  b64 => ...
+);
+// data:image/png;base64,iVBORw0KGgoAA...
+```
 
 ## License
 

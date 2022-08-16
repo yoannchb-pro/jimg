@@ -9,21 +9,48 @@ type ImageSpecification = {
   opacity?: number;
 };
 
-const { createCanvas, loadImage } = require("canvas");
-const fs = require("fs");
+const isNodeJs = typeof window === "undefined";
+
+const { createCanvas, loadImage } = isNodeJs
+  ? require("canvas")
+  : {
+      createCanvas: function () {
+        return document.createElement("canvas");
+      },
+      loadImage: function (path: string) {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+          img.onload = () => resolve(img);
+          img.onerror = (e: any) => reject(e);
+          img.src = path;
+        });
+      },
+    };
+const fs = isNodeJs
+  ? require("fs")
+  : {
+      writeFileSync: function (path: string, data: string, encode: string) {
+        const download = document.createElement("a");
+        download.setAttribute("href", data);
+        download.setAttribute("download", path.replace(/.+?\//gi, ""));
+        document.body.appendChild(download);
+        download.click();
+        download.remove();
+      },
+    };
 
 const defaultOptions = {
   format: "image/png",
   quality: 0.92,
 };
 
-// Draw cat with lime helmet
-export async function jimg(options: {
+async function jimg(options: {
   path?: string;
   images: (ImageSpecification | string)[];
   truncat?: { x?: number; y?: number; width?: number; height?: number };
   quality?: number;
   format?: string;
+  canvas?: any;
 }): Promise<string> {
   options = Object.assign({}, defaultOptions, options);
 
@@ -75,7 +102,11 @@ export async function jimg(options: {
       )
     );
 
-  const canvas = createCanvas(canvasSizeWidth - tx, canvasSizeHeight - ty);
+  const canvas = options.canvas ? options.canvas : createCanvas();
+
+  canvas.width = canvasSizeWidth - tx;
+  canvas.height = canvasSizeHeight - ty;
+
   const ctx = canvas.getContext("2d");
 
   for (const image of imagesLoaded) {
@@ -96,11 +127,11 @@ export async function jimg(options: {
   if (options.path)
     fs.writeFileSync(
       options.path,
-      finalImg.replace(/^.+?base64,/, ""),
+      isNodeJs ? finalImg.replace(/^.+?base64,/, "") : finalImg,
       "base64"
     );
 
   return finalImg;
 }
 
-module.exports = jimg;
+export default jimg;

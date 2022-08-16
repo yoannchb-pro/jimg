@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "./browser",
+    "target": "es6",
+    "module": "umd",
+    "moduleResolution": "node",
+    "lib": ["es2016", "dom", "es5"],
+    "esModuleInterop": true
+  },
+  "include": ["./index.ts"],
+  "exclude": ["./dist/**/*"]
+}
