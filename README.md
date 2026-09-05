@@ -1,7 +1,5 @@
 # jimg
 
-> **Note:** The README is inspired from merge-images by Luke Childs but it's not the same package and fonctionnalities
-
 Merge, truncat, compress, resize, convert, edit multiple images into one single image on nodejs and in the browser.
 
 ## Install
