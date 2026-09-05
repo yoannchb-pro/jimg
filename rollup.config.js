@@ -1,17 +1,22 @@
-const ts = require("rollup-plugin-ts");
-
+const typescript = require("@rollup/plugin-typescript");
 const pkg = require("./package.json");
-const config = require("./tsconfig.json");
 
-export default {
+module.exports = {
   input: "./index.ts",
-  output: [
-    {
-      file: pkg.main,
-      format: "umd",
-      name: "jimg",
-      sourcemap: true,
-    },
+
+  output: {
+    file: pkg.main,
+    format: "umd",
+    name: "jimg",
+    sourcemap: true,
+    exports: "default",
+  },
+
+  external: ["canvas", "fs"],
+
+  plugins: [
+    typescript({
+      tsconfig: "./tsconfig.json",
+    }),
   ],
-  plugins: [ts(config)],
 };

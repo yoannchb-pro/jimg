@@ -1,20 +1,22 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "target": "es2020",
+    "module": "es6",
+    "moduleResolution": "Bundler",
+
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "target": "es6",
+
+    "strict": true,
     "noImplicitAny": true,
-    "moduleResolution": "node",
+
     "sourceMap": true,
+    "declaration": true,
     "outDir": "dist",
-    "baseUrl": ".",
-    "paths": {
-      "*": ["node_modules/*", "src/types/*"]
-    },
-    "declaration": true
+
+    "skipLibCheck": true,
+    "types": ["node"]
   },
-  "include": ["./index.ts"],
-  "exclude": ["./dist/**/*"],
-  "lib": ["es2015"]
+  "include": ["index.ts"],
+  "exclude": ["dist"]
 }

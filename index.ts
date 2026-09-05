@@ -1,5 +1,3 @@
-"use strict";
-
 type ImageSpecification = {
   path: string;
   x?: number;
@@ -56,7 +54,7 @@ async function jimg(options: {
 
   options.images =
     typeof options.images[0] === "string"
-      ? options.images.map((i: string) => ({ path: i }))
+      ? options.images.map((i) => (typeof i === "string" ? { path: i } : i))
       : options.images;
 
   const promises = [];
@@ -75,8 +73,8 @@ async function jimg(options: {
           imgWidth: img.width,
           imgHeight: img.height,
           ...image,
-        })
-      )
+        }),
+      ),
     );
   }
 
@@ -91,15 +89,15 @@ async function jimg(options: {
     (tw ? tw + tx : undefined) ??
     Math.max(
       ...imagesLoaded.map((e) =>
-        e.width ? Math.min(e.imgWidth, e.width) : e.imgWidth
-      )
+        e.width ? Math.min(e.imgWidth, e.width) : e.imgWidth,
+      ),
     );
   const canvasSizeHeight =
     (th ? th + ty : undefined) ??
     Math.max(
       ...imagesLoaded.map((e) =>
-        e.height ? Math.min(e.imgHeight, e.height) : e.imgHeight
-      )
+        e.height ? Math.min(e.imgHeight, e.height) : e.imgHeight,
+      ),
     );
 
   const canvas = options.canvas ? options.canvas : createCanvas();
@@ -116,7 +114,7 @@ async function jimg(options: {
       (image.x ?? 0) - tx,
       (image.y ?? 0) - ty,
       image.width ?? image.imgWidth,
-      image.height ?? image.imgHeight
+      image.height ?? image.imgHeight,
     );
   }
 
@@ -128,7 +126,7 @@ async function jimg(options: {
     fs.writeFileSync(
       options.path,
       isNodeJs ? finalImg.replace(/^.+?base64,/, "") : finalImg,
-      "base64"
+      "base64",
     );
 
   return finalImg;

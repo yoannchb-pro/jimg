@@ -19,4 +19,4 @@ declare function jimg(options: {
     format?: string;
     canvas?: any;
 }): Promise<string>;
-export { jimg as default };
+export default jimg;
